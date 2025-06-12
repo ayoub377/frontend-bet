@@ -1,4 +1,3 @@
-// src/app/pro-analysis/page.tsx
 "use client";
 
 import React, { useEffect, useState } from 'react';
@@ -6,6 +5,7 @@ import axios from 'axios';
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/contexts/AuthContext"; // Ensure this path is correct
 import Button from "@/components/ui/Button"; // Assuming you have this custom Button
+import AdBanner from '@/components/ads/AdBanner'; // 👇 1. Import du composant AdBanner
 
 // Interfaces (PlayerDetail, PositionComparison, ApiFullResponse)
 interface PlayerDetail {
@@ -326,6 +326,11 @@ export default function ProAnalysisPage() {
               {error}
             </p>
           )}
+        </div>
+
+        {/* 👇 2. Intégration du composant AdBanner (visible par tous) 👇 */}
+        <div className="max-w-5xl mx-auto mt-8">
+            <AdBanner slotId={process.env.NEXT_PUBLIC_ADSENSE_PRO_ANALYSIS_SLOT_ID!} />
         </div>
 
         {analysisResult && !isLoadingApi && (

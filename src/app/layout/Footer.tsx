@@ -15,7 +15,7 @@ const Footer: React.FC = () => {
           <div className="md:col-span-4 lg:col-span-5">
             <Link href="/" className="inline-block mb-4" aria-label="Go to homepage">
               {/* Assuming you use the same image logo. If you have an SVG component, use that. */}
-              <img src="/assets/logo-saas.jpg" alt="Sharper Bets Logo" className="h-12 md:h-14 w-auto" />
+              <img src="logo.png" alt="Sharper Bets Logo" className="h-12 md:h-14 w-auto" />
               {/* <Logo className="h-10 text-blue-600 dark:text-sky-500" /> // Example if Logo is an SVG component */}
             </Link>
             <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed max-w-sm">
@@ -43,7 +43,6 @@ const Footer: React.FC = () => {
               <ul className="space-y-2">
                 <li><Link href="/#about" className="text-gray-500 dark:text-gray-400 hover:text-blue-600 dark:hover:text-sky-400 transition-colors text-sm">About Us</Link></li>
                 <li><Link href="/contact" className="text-gray-500 dark:text-gray-400 hover:text-blue-600 dark:hover:text-sky-400 transition-colors text-sm">Contact</Link></li>
-                <li><Link href="/careers" className="text-gray-500 dark:text-gray-400 hover:text-blue-600 dark:hover:text-sky-400 transition-colors text-sm">Careers</Link></li>
                 {/* Add more company links if needed */}
               </ul>
             </div>

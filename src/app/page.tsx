@@ -22,6 +22,10 @@ const FaqComponent = () => (
                         a: "Sharper Bets is a platform providing analytics and tools for sports betting."
                     },
                     {
+                        q: "How do I use the tool?",
+                        a: "Get the exact home team and away team names from Flashscore. Wait for lineups to be posted, which is typically within 45 minutes before the game starts, and then use the tool. Sometimes you may need to retry two to three times for it to work."
+                    },
+                    {
                         q: "How do I join the waitlist?",
                         a: "You can join the waitlist by submitting your email in the form on our services section."
                     },
@@ -39,7 +43,6 @@ const FaqComponent = () => (
         </div>
     </div>
 );
-
 
 export default function HomePage() {
     const router = useRouter();

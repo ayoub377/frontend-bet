@@ -83,7 +83,7 @@ export default function Navbar() {
             <div className="container mx-auto flex items-center justify-between p-4">
                  <div className="flex items-center gap-8">
                     <Link href="/" aria-label="Go to homepage" onClick={() => setIsMenuOpen(false)}>
-                        <img src="/assets/logo-saas.jpg" alt="Sharper Bets logo" className="w-auto h-12 md:h-14"/>
+                        <img src="logo.png" alt="Sharper Bets logo" className="w-auto h-12 md:h-14"/>
                     </Link>
 
                     <div className="hidden md:flex items-center space-x-1">
@@ -171,7 +171,7 @@ export default function Navbar() {
                                 onClick={() => setIsMobileDropdownOpen(!isMobileDropdownOpen)}
                                 rightIcon={<ChevronDown className={clsx('transition-transform text-gray-500 dark:text-gray-400', {'rotate-180': isMobileDropdownOpen})} size={20} />}
                                 // 👇 MODIFIED HERE: Added text-left, text-base, font-medium for consistency
-                                className="cursor-pointer text-left text-base font-medium text-gray-700 dark:text-gray-200 py-2 px-3 hover:!bg-gray-100 dark:hover:!bg-slate-700 hover:!text-blue-600 dark:hover:!text-sky-400 rounded-md"
+                                className="cursor-pointer text-left text-base font-medium text-gray-6s00 dark:text-gray-300 py-2 px-3 hover:!bg-gray-100 dark:hover:!bg-slate-700 hover:!text-blue-600 dark:hover:!text-sky-400 rounded-md"
                                 aria-expanded={isMobileDropdownOpen}
                             >
                                 Services
