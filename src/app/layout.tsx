@@ -13,8 +13,7 @@ import {AuthProvider} from "@/contexts/AuthContext"; // Adjust path if your wrap
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'My SaaS App', // You can customize this
-  description: 'Welcome to the future of SaaS!', // You can customize this
+  title: 'Sharper-Bets', // You can customize this
 };
 
 export default function RootLayout({

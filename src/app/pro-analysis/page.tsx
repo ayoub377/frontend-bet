@@ -5,7 +5,7 @@ import axios from 'axios';
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/contexts/AuthContext"; // Ensure this path is correct
 import Button from "@/components/ui/Button"; // Assuming you have this custom Button
-import AdBanner from '@/components/ads/AdBanner'; // 👇 1. Import du composant AdBanner
+import AdBanner from '@/components/ads/AdBanner';
 
 // Interfaces (PlayerDetail, PositionComparison, ApiFullResponse)
 interface PlayerDetail {
@@ -54,16 +54,16 @@ export default function ProAnalysisPage() {
   const [apiHomeTeamName, setApiHomeTeamName] = useState<string>('');
   const [apiAwayTeamName, setApiAwayTeamName] = useState<string>('');
 
-  useEffect(() => {
-    if (!isLoadingAuth) { // Wait for auth check to complete
-      if (!firebaseUser) {
-        console.log("ProAnalysis: User not authenticated, redirecting to login.");
-        router.push('/auth/login'); // Your login page route
-      }
-      // If user is authenticated, the rendering logic below will handle
-      // "limit reached" messages or allow access based on `canMakeRequest`.
-    }
-  }, [isLoadingAuth, firebaseUser, router]);
+  // useEffect(() => {
+  //   if (!isLoadingAuth) { // Wait for auth check to complete
+  //     if (!firebaseUser) {
+  //       console.log("ProAnalysis: User not authenticated, redirecting to login.");
+  //       router.push('/auth/login'); // Your login page route
+  //     }
+  //     // If user is authenticated, the rendering logic below will handle
+  //     // "limit reached" messages or allow access based on `canMakeRequest`.
+  //   }
+  // }, [isLoadingAuth, firebaseUser, router]);
 
   // Clear error messages if the user's ability to make requests changes (e.g., quota reset)
   useEffect(() => {
@@ -194,8 +194,6 @@ export default function ProAnalysisPage() {
 
   // 1. Handle Authentication or Custom Profile Loading State
   if (isLoadingAuth || (firebaseUser && !customUserProfile && !isLoadingAuth)) {
-    // Show loading if initial auth check is happening OR
-    // if firebaseUser exists but customUserProfile hasn't loaded yet (and auth loading is finished)
     return (
       <div className="flex items-center justify-center min-h-screen bg-gray-100 dark:bg-slate-900">
         <div className="text-xl font-semibold text-gray-700 dark:text-gray-300">
@@ -215,7 +213,7 @@ export default function ProAnalysisPage() {
         </p>
         <Button
           onClick={() => router.push('/auth/login')}
-          className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition"
+          className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition cursor-pointer"
         >
           Go to Login
         </Button>
@@ -224,7 +222,6 @@ export default function ProAnalysisPage() {
   }
 
   // 3. Handle Authenticated User who has run out of daily requests (and is not premium)
-  // This relies on customUserProfile being loaded.
   if (customUserProfile && !customUserProfile.isPremiumMember && !canMakeRequest) {
      return (
       <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 dark:bg-slate-900 p-6 text-center">
@@ -245,12 +242,11 @@ export default function ProAnalysisPage() {
         >
             Back to Dashboard
         </Button>
-        {refreshUserProfile && ( // Show refresh button if function is available
+        {refreshUserProfile && (
             <Button
                 variant="outline"
                 onClick={async () => {
                     await refreshUserProfile();
-                    // isLoadingAuth will be set to false by AuthContext after refresh
                 }}
                 className="mt-2 text-sm"
             >
@@ -272,7 +268,6 @@ export default function ProAnalysisPage() {
           <p className="text-md sm:text-lg text-gray-600 dark:text-gray-300 mt-2">
             Welcome, {customUserProfile?.displayName || firebaseUser.displayName || firebaseUser.email}!
           </p>
-          {/* Display request count information */}
           {customUserProfile && (
             <div className="mt-2 text-sm">
               {customUserProfile.isPremiumMember ? (
@@ -310,9 +305,18 @@ export default function ProAnalysisPage() {
               />
             </div>
           </div>
+
+          {/* 👇 MODIFICATION START: Added user notification about club teams 👇 */}
+          <div className="text-center mb-6">
+            <p className="text-sm text-gray-500 dark:text-gray-400">
+              Please note: This analysis currently only works for <strong>club teams</strong>. National team support is coming soon!
+            </p>
+          </div>
+          {/* 👆 MODIFICATION END 👆 */}
+
           <button
             onClick={handleCompareTeams}
-            disabled={isLoadingApi || !team1Input.trim() || !team2Input.trim() || !canMakeRequest} // Disable if cannot make request
+            disabled={isLoadingApi || !team1Input.trim() || !team2Input.trim() || !canMakeRequest}
             className="w-full bg-blue-600 hover:bg-blue-700 dark:bg-sky-600 dark:hover:bg-sky-700 text-white font-semibold py-3 px-4 rounded-lg shadow-md transition duration-150 ease-in-out disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
           >
             {isLoadingApi ? (
@@ -328,7 +332,6 @@ export default function ProAnalysisPage() {
           )}
         </div>
 
-        {/* 👇 2. Intégration du composant AdBanner (visible par tous) 👇 */}
         <div className="max-w-5xl mx-auto mt-8">
             <AdBanner slotId={process.env.NEXT_PUBLIC_ADSENSE_PRO_ANALYSIS_SLOT_ID!} />
         </div>
@@ -383,7 +386,6 @@ export default function ProAnalysisPage() {
           </div>
         )}
       </main>
-      {/* Consider adding a <Footer /> component here */}
     </div>
   );
 }
