@@ -113,9 +113,9 @@ export default function ProAnalysisPage() {
 
     try {
       const token = await firebaseUser.getIdToken();
-
+      const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:9000';
       const response = await axios.get<ApiFullResponse>(
-        `http://localhost:9000/clubs/compare/${encodeURIComponent(homeTeamName)}/${encodeURIComponent(awayTeamName)}`,
+        `${API_BASE_URL}/clubs/compare/${encodeURIComponent(homeTeamName)}/${encodeURIComponent(awayTeamName)}`,
         {
           headers: {
             Authorization: `Bearer ${token}`

@@ -7,7 +7,7 @@ interface BannerProps {
   imageUrl?: string;
   imageAlt?: string;
   title?: string;
-  description?: string;
+  description: React.ReactNode;
   ctaText?: string; // Optional CTA button text
   ctaHref?: string; // Optional CTA button link
   className?: string;

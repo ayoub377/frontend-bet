@@ -1,19 +1,19 @@
 // src/app/layout.tsx
+
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
-import Navbar from "@/app/layout/Navbar"; // Using your specified path
-import Footer from "@/app/layout/Footer"; // Using your specified path
-// UPDATED: Import your custom ThemeProvider wrapper
+import Navbar from "@/app/layout/Navbar";
+import Footer from "@/app/layout/Footer";
 import { ThemeProvider } from '@/components/providers/ThemeProvider';
-import {AuthProvider} from "@/contexts/AuthContext"; // Adjust path if your wrapper is elsewhere
-
-// import { AuthProvider } from '@/contexts/AuthContext'; // Keep if needed
+import { AuthProvider } from "@/contexts/AuthContext";
+import FirebaseAnalyticsProvider from "@/contexts/FirebaseAnalyticsProvider";
+// NOUVELLE LIGNE : Importez votre composant client
 
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'Sharper-Bets', // You can customize this
+  title: 'Sharper-Bets',
 };
 
 export default function RootLayout({
@@ -22,26 +22,25 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    // ADDED: suppressHydrationWarning to the html tag
     <html lang="en" suppressHydrationWarning>
       <body className={`${inter.className} flex flex-col min-h-screen bg-white dark:bg-slate-950`}>
-      <AuthProvider>
-      <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-        {/* <AuthProvider> */} {/* Ensure AuthProvider wraps Navbar if it depends on it */}
-          <Navbar />
-          {/* Ensure main content has appropriate padding if Navbar is fixed */}
-          <main className="pt-20 flex-grow"> {/* pt-20 assumes a navbar height of approx 5rem/80px */}
-            {children}
-          </main>
-          <Footer />
-        {/* </AuthProvider> */}
-      </ThemeProvider>
-          </AuthProvider>
+        {/* NOUVELLE LIGNE : Placez le provider ici */}
+        <FirebaseAnalyticsProvider /> 
+
+        <AuthProvider>
+          <ThemeProvider
+              attribute="class"
+              defaultTheme="system"
+              enableSystem
+              disableTransitionOnChange
+            >
+              <Navbar />
+              <main className="pt-20 flex-grow">
+                {children}
+              </main>
+              <Footer />
+          </ThemeProvider>
+        </AuthProvider>
       </body>
     </html>
   );
