@@ -33,7 +33,6 @@ const Footer: React.FC = () => {
               <h5 className="text-sm font-semibold text-gray-700 dark:text-gray-200 tracking-wider uppercase mb-3">Product</h5>
               <ul className="space-y-2">
                 <li><Link href="/#services" className="text-gray-500 dark:text-gray-400 hover:text-blue-600 dark:hover:text-sky-400 transition-colors text-sm">Features</Link></li>
-                <li><Link href="/pricing" className="text-gray-500 dark:text-gray-400 hover:text-blue-600 dark:hover:text-sky-400 transition-colors text-sm">Pricing</Link></li>
                 <li><Link href="/#faq" className="text-gray-500 dark:text-gray-400 hover:text-blue-600 dark:hover:text-sky-400 transition-colors text-sm">FAQ</Link></li>
                 {/* Add more product links if needed */}
               </ul>
@@ -50,7 +49,6 @@ const Footer: React.FC = () => {
               <h5 className="text-sm font-semibold text-gray-700 dark:text-gray-200 tracking-wider uppercase mb-3">Legal</h5>
               <ul className="space-y-2">
                 <li><Link href="/privacy-policy" className="text-gray-500 dark:text-gray-400 hover:text-blue-600 dark:hover:text-sky-400 transition-colors text-sm">Privacy Policy</Link></li>
-                <li><Link href="/terms-of-service" className="text-gray-500 dark:text-gray-400 hover:text-blue-600 dark:hover:text-sky-400 transition-colors text-sm">Terms of Service</Link></li>
                 {/* Add more legal links if needed */}
               </ul>
             </div>

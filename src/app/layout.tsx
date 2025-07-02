@@ -8,7 +8,6 @@ import Footer from "@/app/layout/Footer";
 import { ThemeProvider } from '@/components/providers/ThemeProvider';
 import { AuthProvider } from "@/contexts/AuthContext";
 import FirebaseAnalyticsProvider from "@/contexts/FirebaseAnalyticsProvider";
-// NOUVELLE LIGNE : Importez votre composant client
 
 const inter = Inter({ subsets: ['latin'] });
 

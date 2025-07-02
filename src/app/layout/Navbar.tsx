@@ -134,6 +134,9 @@ export default function Navbar() {
 
                         <Link href="/#about" onClick={handleSectionClick('about')} className={desktopNavLinkStyles}>About</Link>
                         <Link href="/#faq" onClick={handleSectionClick('faq')} className={desktopNavLinkStyles}>FAQ</Link>
+                        <Link href="/blog">
+Blog
+</Link>
                     </div>
                 </div>
 
