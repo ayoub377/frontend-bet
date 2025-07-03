@@ -1,5 +1,5 @@
-// components/MDXContent.tsx
-'use client';
+// components/MDXContent.client.tsx
+"use client"
 
 import React from 'react';
 import { MDXRemote, MDXRemoteProps } from 'next-mdx-remote';

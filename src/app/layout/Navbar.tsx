@@ -134,9 +134,7 @@ export default function Navbar() {
 
                         <Link href="/#about" onClick={handleSectionClick('about')} className={desktopNavLinkStyles}>About</Link>
                         <Link href="/#faq" onClick={handleSectionClick('faq')} className={desktopNavLinkStyles}>FAQ</Link>
-                        <Link href="/blog">
-Blog
-</Link>
+                        <Link href="/blog" className={desktopNavLinkStyles}>Blog</Link>
                     </div>
                 </div>
 
@@ -188,7 +186,8 @@ Blog
                         </div>
                         <Link href="/#about" className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-slate-700 hover:text-blue-600 dark:hover:text-sky-400" onClick={(e) => { handleSectionClick('about')(e); }}>About</Link>
                         <Link href="/#faq" className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-slate-700 hover:text-blue-600 dark:hover:text-sky-400" onClick={(e) => { handleSectionClick('faq')(e); }}>FAQ</Link>
-                        <div className="pt-4 mt-2 border-t border-gray-200 dark:border-slate-700">
+                        <Link href="/blog" className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-slate-700 hover:text-blue-600 dark:hover:text-sky-400" onClick={() => setIsMenuOpen(false)}>Blog</Link>
+                         <div className="pt-4 mt-2 border-t border-gray-200 dark:border-slate-700">
                             <Button
                                 variant="ghost"
                                 onClick={handleAccountRedirect}

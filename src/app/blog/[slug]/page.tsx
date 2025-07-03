@@ -1,44 +1,56 @@
 // app/blog/[slug]/page.tsx
+import type { ReactNode } from 'react'
 import { getPostBySlug, getAllPostsMeta } from '@/lib/posts'
-import {MDXContent} from "@/components/providers/MDXContent";
+import type { PostMeta } from '@/lib/posts'
 
 export async function generateStaticParams() {
   const posts = await getAllPostsMeta()
-  return posts.map((p) => ({ slug: p.slug }))
+  return posts.map(({ slug }) => ({ slug }))
 }
 
-export default async function PostPage({ params }: { params: { slug: string } }) {
-  const { meta, content } = await getPostBySlug(params.slug)
+export default async function BlogPostPage({
+  params,
+}: {
+  params: Promise<{ slug: string }>
+}) {
+  const { slug } = await params
+  const { meta, content }: { meta: PostMeta; content: ReactNode } = await getPostBySlug(slug)
 
   return (
-    <article className="min-h-screen bg-gray-50 py-16 px-4 sm:px-6 lg:px-8">
-      {/* Hero Section */}
-      <header className="max-w-3xl mx-auto text-center mb-12">
-        <h1 className="text-5xl font-extrabold text-gray-900 mb-4">
+    <article className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      {/* Hero */}
+      <header className="mb-8">
+        <h1 className="text-4xl font-extrabold tracking-tight text-gray-900 mb-2">
           {meta.title}
         </h1>
-        <div className="flex items-center justify-center space-x-4 text-gray-500">
-          <span>By {meta.author}</span>
-          <span>•</span>
-          <time dateTime={meta.date}>
+        <div className="flex items-center text-sm text-gray-500 space-x-4">
+          <time dateTime={meta.date} className="uppercase">
             {new Date(meta.date).toLocaleDateString(undefined, {
               year: 'numeric',
-              month: 'long',
-              day: 'numeric'
+              month: 'short',
+              day: 'numeric',
             })}
           </time>
+          <span>•</span>
+          <span>By {meta.author}</span>
         </div>
-        {meta.excerpt && (
-          <p className="mt-6 text-lg text-gray-700 max-w-2xl mx-auto">
-            {meta.excerpt}
-          </p>
-        )}
+        <hr className="mt-6 border-gray-200" />
       </header>
 
-      {/* Content */}
-      <div className="prose lg:prose-xl max-w-3xl mx-auto text-gray-800">
-        <MDXContent {...content} />
-      </div>
+      {/* MDX Content */}
+      <section className="prose prose-lg mx-auto">
+        {content}
+      </section>
+
+      {/* Footer CTA / Navigation */}
+      <footer className="mt-16 border-t pt-8 border-gray-200 text-center">
+        <p className="text-gray-600">
+          Enjoyed this post?{' '}
+          <a href="/blog" className="text-indigo-600 hover:underline">
+            Back to all articles
+          </a>
+        </p>
+      </footer>
     </article>
   )
 }
